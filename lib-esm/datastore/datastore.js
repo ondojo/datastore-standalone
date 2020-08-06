@@ -216,22 +216,16 @@ var validateModelFields = function (modelDefinition) { return function (k, v) {
         }
         if (isGraphQLScalarType(type)) {
             var jsType_1 = GraphQLScalarType.getJSType(type);
-            if (name_1 === 'tags') {
-                console.debug('isArray ', isArray);
-                console.debug('v: ', v);
-                console.debug('isRequired: ', isRequired);
-                console.debug('v is array ', Array.isArray(v));
-            }
             if (isArray) {
                 if (!Array.isArray(v) && isRequired) {
                     throw new Error("Field " + name_1 + " should be of type " + jsType_1 + "[], " + typeof v + " received. " + v);
                 }
-                if (v && v.some(function (e) { return typeof e !== jsType_1; })) {
+                if (v !== null && v !== undefined && v.some(function (e) { return typeof e !== jsType_1; })) {
                     var elemTypes = v.map(function (e) { return typeof e; }).join(',');
                     throw new Error("All elements in the " + name_1 + " array should be of type " + jsType_1 + ", [" + elemTypes + "] received. " + v);
                 }
             }
-            else if (typeof v !== jsType_1 && v !== null) {
+            else if (typeof v !== jsType_1 && v !== null && v !== undefined) {
                 throw new Error("Field " + name_1 + " should be of type " + jsType_1 + ", " + typeof v + " received. " + v);
             }
         }

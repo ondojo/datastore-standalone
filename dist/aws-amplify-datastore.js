@@ -41763,19 +41763,12 @@ var validateModelFields = function validateModelFields(modelDefinition) {
       if (Object(_types__WEBPACK_IMPORTED_MODULE_7__["isGraphQLScalarType"])(type)) {
         var jsType_1 = _types__WEBPACK_IMPORTED_MODULE_7__["GraphQLScalarType"].getJSType(type);
 
-        if (name_1 === 'tags') {
-          console.debug('isArray ', isArray);
-          console.debug('v: ', v);
-          console.debug('isRequired: ', isRequired);
-          console.debug('v is array ', Array.isArray(v));
-        }
-
         if (isArray) {
           if (!Array.isArray(v) && isRequired) {
             throw new Error("Field " + name_1 + " should be of type " + jsType_1 + "[], " + _typeof(v) + " received. " + v);
           }
 
-          if (v && v.some(function (e) {
+          if (v !== null && v !== undefined && v.some(function (e) {
             return _typeof(e) !== jsType_1;
           })) {
             var elemTypes = v.map(function (e) {
@@ -41783,7 +41776,7 @@ var validateModelFields = function validateModelFields(modelDefinition) {
             }).join(',');
             throw new Error("All elements in the " + name_1 + " array should be of type " + jsType_1 + ", [" + elemTypes + "] received. " + v);
           }
-        } else if (_typeof(v) !== jsType_1 && v !== null) {
+        } else if (_typeof(v) !== jsType_1 && v !== null && v !== undefined) {
           throw new Error("Field " + name_1 + " should be of type " + jsType_1 + ", " + _typeof(v) + " received. " + v);
         }
       }
