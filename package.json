@@ -1,5 +1,5 @@
 {
-	"name": "datastore-standalone",
+	"name": "@aws-amplify/datastore",
 	"version": "0.0.1",
 	"description": "AppSyncLocal support for aws-amplify",
 	"main": "./lib/index.js",
